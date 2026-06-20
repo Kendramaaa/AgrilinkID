@@ -1,0 +1,499 @@
+/* --- Konfigurasi Background & Overlay --- */
+.marketplace-page {
+  position: relative;
+  height: 100vh;
+  max-height: 93vh;
+  z-index: 1; /* Memastikan konten berada di atas */
+}
+
+.marketplace-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Lempar gambar ke paling belakang */
+  overflow: hidden;
+}
+
+/* Transparansi Background (Contoh menggunakan Hijau Agrikultur Gelap 70%) */
+.marketplace-overlay::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(27, 94, 32, 0.7); 
+}
+
+.marketplace-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 1.0;
+}
+
+/* --- Konfigurasi Header --- */
+.page-header {
+  color: var(--white);
+
+  padding: 3rem 0;
+  margin-bottom: 2rem;
+  text-align: left;
+  position: relative; 
+  z-index: 2; /* Memastikan teks judul berada di atas overlay */
+}
+
+.page-header h1 {
+  color: var(--white);
+  font-size: 2.5rem;
+  margin-top: rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3); /* Tambahan bayangan agar teks lebih jelas */
+}
+
+.page-header p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  color: var(--white);
+}
+
+.marketplace-content {
+  padding-bottom: 4rem;
+}
+
+/* Controls Section */
+.controls-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  flex: 1;
+  min-width: 300px;
+  position: relative;
+}
+
+.search-box i {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
+}
+
+.search-box input {
+  padding-left: 3rem;
+  background-color: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.category-filters {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.category-filters button {
+  padding: 0.6rem 1.25rem;
+  border-radius: 20px;
+  background-color: var(--white);
+  border: 1px solid var(--border);
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.category-filters button.active,
+.category-filters button:hover {
+  background-color: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+}
+
+/* Product Grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2rem;
+}
+
+.no-products {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4rem 0;
+  color: white;
+}
+
+.no-products i {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+/* Product Card */
+.product-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-img-wrapper {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.product-card:hover .card-img {
+  transform: scale(1.05);
+}
+
+.category-tag {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: rgba(46, 125, 50, 0.9);
+  color: var(--white);
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.card-body {
+  padding: 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.card-price {
+  font-size: 1.25rem;
+  color: var(--primary);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.price-unit {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  font-weight: 400;
+}
+
+.card-footer-info {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-light);
+  font-size: 0.85rem;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  max-width: 600px;
+  width: 100%;
+  padding: 2.5rem;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--text-light);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.submit-btn {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+/* Detail Modal specific */
+.detail-modal {
+  max-width: 900px;
+}
+
+.modal-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.detail-img-wrapper {
+  border-radius: var(--radius);
+  overflow: hidden;
+  height: 100%;
+  min-height: 300px;
+}
+
+.detail-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detail-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-price {
+  font-size: 1.75rem;
+  color: var(--primary);
+  font-weight: 700;
+  margin: 0.5rem 0;
+}
+
+.detail-price span {
+  font-size: 1rem;
+  color: var(--text-light);
+  font-weight: 400;
+}
+
+.detail-stock {
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+}
+
+.detail-desc {
+  margin-bottom: 2rem;
+}
+
+.detail-desc h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.detail-desc p {
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+.btn-whatsapp {
+  background-color: #25D366;
+  color: var(--white);
+  width: 100%;
+  padding: 0.8rem;
+  font-weight: 600;
+}
+
+/* Status Badge */
+.status-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  z-index: 10;
+}
+
+.status-badge.available {
+  background-color: #2e7d32;
+  color: white;
+}
+
+.status-badge.unavailable {
+  background-color: #d32f2f;
+  color: white;
+}
+
+.farmer-info {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid var(--primary);
+}
+
+.farmer-info p {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.farmer-info i {
+  margin-right: 0.5rem;
+  color: var(--primary);
+}
+
+.btn-edit {
+  background-color: var(--secondary);
+  color: orange;
+  flex: 1;
+}
+
+.btn-delete {
+  background-color: #dc3545;
+  color: white;
+  flex: 1;
+}
+
+/* Dashboard Stats */
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.stat-card-main {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  border-left: 5px solid var(--primary);
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-card-main h4 {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-card-main .value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+/* Management Table */
+.table-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  overflow-x: auto;
+  margin-bottom: 2rem;
+}
+
+.manage-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.manage-table th {
+  background-color: #f8f9fa;
+  padding: 1.25rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #444;
+  border-bottom: 2px solid #eee;
+}
+
+.manage-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+.product-cell {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.product-thumb {
+  width: 50px;
+  height: 50px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.product-name {
+  font-weight: 600;
+  color: #333;
+}
+
+.badge-cat {
+  padding: 0.3rem 0.6rem;
+  background: #e8f5e9;
+  color: var(--primary-dark);
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Media Query untuk Mobile */
+@media (max-width: 768px) {
+  .dashboard-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .modal-detail-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .detail-img-wrapper {
+    min-height: 200px;
+    height: 200px;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
